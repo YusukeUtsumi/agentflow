@@ -2,6 +2,7 @@ import yaml
 import importlib
 import sys
 from pathlib import Path
+sys.path.append(str(Path("templates").resolve().parent))
 
 # Store outputs of each step
 step_outputs = {}

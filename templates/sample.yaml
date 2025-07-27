@@ -1,5 +1,10 @@
 steps:
-  - id: echo_test
+  - id: agent_a
     handler: python
-    module: examples.echo
-    input: "Hello, agentflow!"
+    module: templates.agent_a
+    input: ""
+
+  - id: agent_b
+    handler: python
+    module: templates.agent_b
+    input: "{{agent_a.output}}"
