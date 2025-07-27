@@ -1,0 +1,38 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+
+# VSCode and JetBrains IDE settings
+.vscode/
+.idea/
+
+# macOS system files
+.DS_Store
+
+# PyInstaller / dist
+build/
+dist/
+*.spec
+
+# Logs
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Test coverage
+htmlcov/
+coverage.xml
+.cache/
+
+# pip-wheel
+*.egg-info/
+*.egg
+.eggs/

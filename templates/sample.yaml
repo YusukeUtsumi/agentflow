@@ -1,0 +1,5 @@
+steps:
+  - id: echo_test
+    handler: python
+    module: examples.echo
+    input: "Hello, agentflow!"
