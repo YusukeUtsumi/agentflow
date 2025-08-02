@@ -56,18 +56,25 @@ handler_map = {
     # 追加する場合はここに追記
 }
 
-# ステップ実行ロジック
+# ステップ実行ロジック（エラーハンドリング追加）
 def run_step(step):
     step_id = step.get("id")
     handler = step.get("handler")
     input_data = resolve_input(step.get("input"))
 
+    print(f"[{step_id}] ▶ Starting (handler: {handler})")
+
     if handler not in handler_map:
-        raise NotImplementedError(f"Handler '{handler}' is not supported yet.")
-    
-    output = handler_map[handler](step, step_id, input_data)
-    step_outputs[step_id] = output
-    print(f"[{step_id}] Output: {output}")
+        print(f"[{step_id}] ❌ Error: Handler '{handler}' is not supported.")
+        sys.exit(1)
+
+    try:
+        output = handler_map[handler](step, step_id, input_data)
+        step_outputs[step_id] = output
+        print(f"[{step_id}] ✅ Output: {output}")
+    except Exception as e:
+        print(f"[{step_id}] ❌ Error: {type(e).__name__}: {str(e)}")
+        sys.exit(1)  # エラー時はここで停止
 
 # メイン関数
 def main(yaml_path):
