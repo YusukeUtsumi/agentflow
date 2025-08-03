@@ -14,16 +14,16 @@ LLMに「喋らせる」のではなく、働かせるための構造。
 ・ステップ間のデータ連携：{{step_id.ファイル名}}プレースホルダーで前のステップの結果を参照可能
 
 ## ディレクトリ構成
-agentflow/
-├─ agentflow_runner.py      # 実行エントリーポイント
-├─ templates/               # ステップ用のテンプレ
-│   ├─ HelloWorld.js
-│   ├─ agent_a.py
-│   ├─ agent_b.py
-│   └─ sample.yaml
-├─ examples/
-│   └─ echo.py
-└─ README.md
+agentflow/  
+├─ agentflow_runner.py      # 実行エントリーポイント  
+├─ templates/               # ステップ用のテンプレ  
+│   ├─ HelloWorld.js  
+│   ├─ agent_a.py  
+│   ├─ agent_b.py  
+│   └─ sample.yaml  
+├─ examples/  
+│   └─ echo.py  
+└─ README.md  
 
 ## 使い方
 ### YAMLを定義
