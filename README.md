@@ -16,13 +16,33 @@ LLMに「喋らせる」のではなく、働かせるための構造。
 ## ディレクトリ構成
 agentflow/
 ├─ agentflow_runner.py      # 実行エントリーポイント
-├─ templates/               # ステップ用のテンプレモジュール
+├─ templates/               # ステップ用のテンプレ
+│   ├─ HelloWorld.js
 │   ├─ agent_a.py
 │   ├─ agent_b.py
-│   └─ agent_c.py
+│   └─ sample.yaml
 ├─ examples/
-│   └─ sample.yaml          # サンプルYAML
+│   └─ echo.py
 └─ README.md
 
 ## 使い方
+### YAMLを定義
+```yaml:templates/sample.yaml
+steps:
+  - id: agent_a
+    handler: python
+    module: templates.agent_a
+    input: ""
 
+  - id: agent_b
+    handler: python
+    module: templates.agent_b
+    input: "{{agent_a.output}}"
+```
+
+### 実行
+```bash
+python agentflow_runner.py examples/sample.yaml
+```
+## ライセンス
+MIT License
