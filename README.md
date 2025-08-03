@@ -15,14 +15,14 @@ LLMに「喋らせる」のではなく、働かせるための構造。
 
 ## ディレクトリ構成
 agentflow/  
-├─ agentflow_runner.py      # 実行エントリーポイント  
-├─ templates/               # ステップ用のテンプレ  
-│   ├─ HelloWorld.js  
-│   ├─ agent_a.py  
-│   ├─ agent_b.py  
-│   └─ sample.yaml  
+├─ agentflow_runner.py       # 実行エントリーポイント  
+├─ templates/                # ステップ用のテンプレ  
+│      ├─ HelloWorld.js  
+│      ├─ agent_a.py  
+│      ├─ agent_b.py  
+│      └─ sample.yaml  
 ├─ examples/  
-│   └─ echo.py  
+│      └─ echo.py  
 └─ README.md  
 
 ## 使い方
