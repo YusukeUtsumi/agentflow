@@ -1,10 +1,12 @@
 steps:
   - id: agent_a
     handler: python
-    module: templates.agent_a
+    module: templates.market.market_research
     input: ""
+    parallel: true
 
   - id: agent_b
     handler: python
-    module: templates.agent_b
+    module: templates.market.output
     input: "{{agent_a.output}}"
+    parallel: true

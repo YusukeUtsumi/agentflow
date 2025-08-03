@@ -30,6 +30,5 @@ def run(input):
 
     stdout, _ = process.communicate(prompt)
     output_path.write_text(stdout)
-
     print(f"[agent_b] 分析結果を保存しました: {output_path}")
     return str(output_path)

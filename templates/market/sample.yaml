@@ -1,0 +1,18 @@
+steps:
+  - id: agent_a
+    handler: python
+    module: templates.market.market_research
+    input: ""
+    parallel: true
+
+  - id: agent_b
+    handler: python
+    module: templates.market.market_idea
+    input: "{{agent_a.output}}"
+    parallel: true
+
+  - id: agent_c
+    handler: python
+    module: templates.market.report
+    input: "{{agent_a.output}} + {{agent_b.output}}"
+    parallel: false

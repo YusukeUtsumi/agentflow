@@ -4,6 +4,7 @@ import subprocess
 import sys
 import os
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
 
 # モジュールパスの設定
 sys.path.append(str(Path("templates").resolve().parent))
@@ -53,7 +54,6 @@ handler_map = {
     "python": run_python,
     "shell": run_shell,
     "javascript": run_javascript,
-    # 追加する場合はここに追記
 }
 
 # ステップ実行ロジック（エラーハンドリング追加）
@@ -74,16 +74,34 @@ def run_step(step):
         print(f"[{step_id}] ✅ Output: {output}")
     except Exception as e:
         print(f"[{step_id}] ❌ Error: {type(e).__name__}: {str(e)}")
-        sys.exit(1)  # エラー時はここで停止
+        sys.exit(1)
 
-# メイン関数
+# 並列ステップ実行
+def run_parallel_steps(steps):
+    with ThreadPoolExecutor() as executor:
+        futures = [executor.submit(run_step, step) for step in steps]
+        for future in futures:
+            future.result()  # 全て完了するまで待つ
+
+# メイン関数（parallel対応）
 def main(yaml_path):
     with open(yaml_path, "r") as f:
         flow = yaml.safe_load(f)
     
     steps = flow.get("steps", [])
+    parallel_batch = []
+
     for step in steps:
-        run_step(step)
+        if step.get("parallel", False):
+            parallel_batch.append(step)
+        else:
+            if parallel_batch:
+                run_parallel_steps(parallel_batch)
+                parallel_batch = []
+            run_step(step)
+
+    if parallel_batch:
+        run_parallel_steps(parallel_batch)
 
 # CLI起動
 if __name__ == "__main__":
